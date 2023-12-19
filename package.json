@@ -7,24 +7,28 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^7",
-    "express": "^4",
+    "@sap/cds-hana": "^2",
+    "@sap/hana-client": "^2.19.20",
     "@sap/xssec": "^3",
-    "passport": "^0",
-    "@sap/cds-hana": "^2"
+    "express": "^4",
+    "passport": "^0"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
-    "@sap/cds-dk": "^7"
+    "@sap/cds-dk": "^7",
+    "@sap/hdi-deploy": "4.9.1"
   },
   "scripts": {
     "start": "cds-serve"
   },
   "cds": {
-    "hana" : {
-      "deploy-format": "hdbtable"
+    "hana": {
+      "deploy-format": "hdbtable", 
+      "authentication": { 
+        "strategy": "no-auth" 
+      }
     },
     "requires": {
-      "auth": "xsuaa",
       "db": "hana"
     }
   }
