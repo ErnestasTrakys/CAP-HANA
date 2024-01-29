@@ -37,14 +37,25 @@ resources:
   - name: HC_OFF_SUPPLIES-auth
     type: org.cloudfoundry.managed-service
     parameters:
-      service: xsuaa
       service-plan: application
+      service: xsuaa
       path: ./xs-security.json
       config:
-        xsappname: HC_OFF_SUPPLIES-${org}-${space}
+        xsappname: 'HC_OFF_SUPPLIES-${space}'
+        role-collections:
+          - name: 'Vendor-${space}'
+            description: Read Access
+            role-template-references:
+              - $XSAPPNAME.Vendor
+          - name: 'ProcurementManager-${space}'
+            description: All Access
+            role-template-references:
+              - $XSAPPNAME.ProcurementManager
         tenant-mode: dedicated
+
   - name: HC_OFF_SUPPLIES-db
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
       service-plan: hdi-shared
+
